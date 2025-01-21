@@ -4,6 +4,7 @@ use game::GamePlugin;
 pub mod game;
 pub mod alien;
 pub mod resolution;
+pub mod player;
 
 fn main() {
     App::new()

@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::{alien, resolution};
+use crate::{player, alien, resolution};
 
 pub struct GamePlugin;
 
@@ -15,8 +15,9 @@ impl Plugin for GamePlugin {
         app
             .add_plugins(
                 (
+                    resolution::ResolutionPlugin,
+                    player::PlayerPlugin,
                     alien::AlienPlugin, 
-                    resolution::ResolutionPlugin
                 )
             )
             .add_systems(Startup, setup_scene);

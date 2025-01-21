@@ -30,7 +30,7 @@ fn setup_aliens(mut commands: Commands, asset_server: Res<AssetServer>, resoluti
         downshift_alines: false,
     });
     
-    let alien_texture = asset_server.load("alien.png");
+    let alien_texture: Handle<Image> = asset_server.load("alien.png");
 
     for x in 0..WIDTH {
         for y in 0..HEIGHT {
