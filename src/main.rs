@@ -5,6 +5,7 @@ pub mod game;
 pub mod alien;
 pub mod resolution;
 pub mod player;
+pub mod laser_projectile;
 
 fn main() {
     App::new()

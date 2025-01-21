@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::{player, alien, resolution};
+use crate::{alien, laser_projectile, player, resolution};
 
 pub struct GamePlugin;
 
@@ -17,7 +17,8 @@ impl Plugin for GamePlugin {
                 (
                     resolution::ResolutionPlugin,
                     player::PlayerPlugin,
-                    alien::AlienPlugin, 
+                    laser_projectile::LaserProjectilePlugin,
+                    alien::AlienPlugin,
                 )
             )
             .add_systems(Startup, setup_scene);

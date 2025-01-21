@@ -23,7 +23,11 @@ const SPACING: f32 = 24.0;
 const SPEED: f32 = 100.0;
 const ALIEN_DOWNSHIFT_DISTANCE: f32 = 32.0;
 
-fn setup_aliens(mut commands: Commands, asset_server: Res<AssetServer>, resolution: Res<Resolution>) {
+fn setup_aliens(
+    mut commands: Commands, 
+    asset_server: Res<AssetServer>, 
+    resolution: Res<Resolution>
+) {
     commands.insert_resource(AlienManager {
         direction: 1.0,
         distance_from_boundary: 0.0,

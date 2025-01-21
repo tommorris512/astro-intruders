@@ -1,6 +1,8 @@
 use bevy::prelude::*;
 
+use crate::laser_projectile::LaserProjectile;
 use crate::resolution::Resolution;
+
 pub struct PlayerPlugin;
 
 #[derive(Component)]
@@ -42,7 +44,9 @@ fn setup_player(
 }
 
 fn update_player(
+    mut commands: Commands,
     mut player_query: Query<(&mut Player, &mut Transform)>,
+    asset_server: Res<AssetServer>, 
     time: Res<Time>,
     keys: Res<ButtonInput<KeyCode>>,
     resolution: Res<Resolution>
@@ -75,8 +79,26 @@ fn update_player(
 
     player.shoot_timer -= time.delta_secs();
 
-    if keys.pressed(KeyCode::Space) {
+    if keys.pressed(KeyCode::Space) && player.shoot_timer <= 0.0 {
+        // Reset shot cooldown
+        player.shoot_timer = LASER_FIRE_COOLDOWN;
 
+        // TODO: Move texture loading elsewhere to prevent load on each projectile spawn
+        let laser_projectile_texture = asset_server.load("laser_projectile.png");
+
+        commands.spawn((
+            LaserProjectile {
+                speed: LASER_SPEED,
+            },
+            Sprite::from_image(
+                laser_projectile_texture
+            ),
+            Transform::from_translation(
+                transform.translation
+            ).with_scale(
+                Vec3::splat(resolution.pixel_draw_ratio)
+            ),
+        ));
     }
 }
 
